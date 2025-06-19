@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explora Local</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
+</head>
+<body>
+    <h1>🌍 Explora Local</h1>
+    <form id="form">
+        <input type="text" id="titulo" placeholder="Nombre de la experiencia" required>
+        <input type="text" id="lugar" placeholder="Ubicación" required>
+        <textarea id="descripcion" placeholder="Descripción breve" required></textarea>
+        <button type="submit">Agregar</button>
+    </form>
+    <ul id="lista"></ul>
+
+    <script>
+        const form = document.getElementById('form');
+        const lista = document.getElementById('lista');
+
+        function cargar() {
+            const datos = JSON.parse(localStorage.getItem('experiencias')) || [];
+            lista.innerHTML = '';
+            datos.forEach((exp, i) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${exp.titulo}</strong> en <em>${exp.lugar}</em><br>${exp.descripcion}`;
+                const btn = document.createElement('button');
+                btn.textContent = '❌';
+                btn.onclick = () => {
+                    datos.splice(i, 1);
+                    localStorage.setItem('experiencias', JSON.stringify(datos));
+                    cargar();
+                };
+                li.appendChild(btn);
+                lista.appendChild(li);
+            });
+        }
+
+        form.onsubmit = e => {
+            e.preventDefault();
+            const exp = {
+                titulo: document.getElementById('titulo').value,
+                lugar: document.getElementById('lugar').value,
+                descripcion: document.getElementById('descripcion').value
+            };
+            const datos = JSON.parse(localStorage.getItem('experiencias')) || [];
+            datos.push(exp);
+            localStorage.setItem('experiencias', JSON.stringify(datos));
+            form.reset();
+            cargar();
+        };
+
+        window.onload = cargar;
+    </script>
+</body>
+</html>
