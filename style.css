@@ -1,1 +1,48 @@
-CSS_PLACEHOLDER
+body {
+  font-family: sans-serif;
+  background: #f0f4f9;
+  padding: 2em;
+  max-width: 700px;
+  margin: auto;
+}
+h1 {
+  text-align: center;
+  color: #007bff;
+}
+.intro {
+  text-align: center;
+  margin-bottom: 1em;
+  color: #333;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+input, textarea, button {
+  padding: 0.6em;
+  font-size: 1em;
+}
+textarea {
+  resize: vertical;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background: white;
+  margin: 0.5em 0;
+  padding: 1em;
+  border-left: 4px solid #007bff;
+}
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.9;
+}
